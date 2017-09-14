@@ -4,7 +4,9 @@
 
 ## Prerequesite : 
 > Google VR Services  [Download](https://play.google.com/store/apps/details?id=com.google.vr.vrcore)
+
 > BTConfig[1.0.0-Flip] [Download on Release Section](https://github.com/tazzkiller/Gvr-XimmerseFlip/releases/ )
+
 > Unity 2017.x.x
 ## Installation :
 #### Android
