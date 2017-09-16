@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.VR;
 using Ximmerse.InputSystem;
-using System;
-using System.Runtime.InteropServices;
 
 
 namespace Gvr.Internal {
@@ -13,6 +11,7 @@ namespace Gvr.Internal {
 		public bool SupportsBatteryStatus {
 			get { return true; }
 		}
+			
   #region IControllerProvider implementation
   void IControllerProvider.OnPause ()
   {
@@ -20,20 +19,13 @@ namespace Gvr.Internal {
   void IControllerProvider.OnResume ()
   {
   }
-			 
   // this is called every frame
   void IControllerProvider.ReadState (ControllerState outState)
   {
 			lock (state) {
 				
-				if (ctrl == null) {
-					XDevicePlugin.Init ();
-				int handle = XDevicePlugin.GetInputDeviceHandle ("XCobra-0");
-				ctrl = new ControllerInput (handle);
-				} else {
-					ctrl.UpdateState ();
-				}
 				// GVR Hack Detection Controller
+				ctrl = ControllerInputManager.instance.GetControllerInput ("LeftController");
 				if (ctrl.connectionState == DeviceConnectionState.Connected) {
 					state.connectionState = GvrConnectionState.Connected;
 				} else if (ctrl.connectionState == DeviceConnectionState.Connecting) {
@@ -105,8 +97,8 @@ namespace Gvr.Internal {
     			state.ClearTransientState();
   }
 			
+			
   #endregion
 
 }
-
 }
