@@ -329,7 +329,14 @@ namespace Ximmerse.VR{
 
         public void OnApplicationPause(bool isPause)
         {
+            #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_IOS
+            if(isPause)
+                XDevicePlugin.OnPause();
+            else 
+                XDevicePlugin.OnResume();
+            #else
             XDevicePlugin.OnPauseUnity(isPause);
+            #endif
         }
 
 		#endregion Unity Messages

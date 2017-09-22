@@ -28,15 +28,11 @@ namespace Ximmerse {
 
 		protected static string[] s_XimmerseDeviceTypeNames=new string[] {
 			"Unknown Device",
-			"Arm Model",
-			"Inside-Out",
-			"Outside-In",
+			"Hand Model",
 		};
 		protected static int [] s_XimmerseDeviceTypeValues=new int[] {
 			-1,
 			0x1010,
-			0x3000,
-			0x4000,
 		};
 
 		#endregion Static
@@ -154,31 +150,17 @@ namespace Ximmerse {
 							EndGroup();
 						}
 					EndGroup();}
-					switch(DrawIntPopup("Ximmerse Device","XimmerseDevice.type",0x4000,s_XimmerseDeviceTypeNames,s_XimmerseDeviceTypeValues)) {
+					switch(DrawIntPopup("Ximmerse Device","XimmerseDevice.type",0x1010,s_XimmerseDeviceTypeNames,s_XimmerseDeviceTypeValues)) {
 						case 0x1010:
 				EndGroup();
 							DrawSeparator();
-							EditorGUILayout.LabelField("Arm Model",m_HeaderStyle);
+							EditorGUILayout.LabelField("Hand Model",m_HeaderStyle);
 							BeginGroup();
-								DrawVector3Field("Shoulder Position","ArmModel.shoulderPosition",new Vector3(0.19f, -0.19f, -0.03f));
-								DrawVector3Field("Elbow Position","ArmModel.elbowPosition",new Vector3(0.195f, -0.5f, -0.075f));
-								DrawVector3Field("Wrist Position","ArmModel.wristPosition",new Vector3(0.0f, 0.0f, 0.25f));
-								DrawVector3Field("Pointer Position","ArmModel.pointerPosition",new Vector3(0.0f, -0.009f, 0.099f));
+								DrawVector3Field("Shoulder Position","HandModel.shoulderPosition",new Vector3(0.19f, -0.19f, -0.03f));
+								DrawVector3Field("Elbow Position","HandModel.elbowPosition",new Vector3(0.195f, -0.5f, -0.075f));
+								DrawVector3Field("Wrist Position","HandModel.wristPosition",new Vector3(0.0f, 0.0f, 0.25f));
+								DrawVector3Field("Pointer Position","HandModel.pointerPosition",new Vector3(0.0f, -0.009f, 0.099f));
 							EndGroup();
-						break;
-						case 0x3200:
-							BeginGroup();
-								DrawToggle("Fix Shake(Experimental)","XimmerseTracker[Inside-out].fixShake",false);
-								DrawSlider("M2P Latency","XimmerseTracker[Inside-out].m2pLatency",0.0f,0.0f,1.0f);
-							EndGroup();
-				EndGroup();
-						break;
-						case 0x4000:
-							BeginGroup();
-								DrawVector3Field("Position","XimmerseTracker[Outside-in].position",new Vector3(0,1.675f,1.5f));
-								DrawVector3Field("Rotation","XimmerseTracker[Outside-in].rotation",new Vector3(15f,0,0));
-							EndGroup();
-				EndGroup();
 						break;
 						default:
 				EndGroup();

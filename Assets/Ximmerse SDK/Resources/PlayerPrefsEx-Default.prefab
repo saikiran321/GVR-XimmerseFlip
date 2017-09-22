@@ -113,15 +113,35 @@ MonoBehaviour:
   mapColor:
     m_Data:
     - key: VRDevice.fadeColor
-      value: {r: 0.30588236, g: 0.3529412, b: 0.3921569, a: 1}
+      value:
+        r: 0.30588236
+        g: 0.3529412
+        b: 0.3921569
+        a: 1
     - key: VRDevice.badFadeColor
-      value: {r: 0.30588236, g: 0.3529412, b: 0.3921569, a: 1}
+      value:
+        r: 0.30588236
+        g: 0.3529412
+        b: 0.3921569
+        a: 1
     - key: PlayArea.groundColor
-      value: {r: 0, g: 1, b: 1, a: 1}
+      value:
+        r: 0
+        g: 1
+        b: 1
+        a: 1
     - key: PlayArea.wallColor
-      value: {r: 0, g: 1, b: 1, a: 1}
+      value:
+        r: 0
+        g: 1
+        b: 1
+        a: 1
     - key: 
-      value: {r: 0, g: 0, b: 0, a: 0}
+      value:
+        r: 0
+        g: 0
+        b: 0
+        a: 0
   mapObject:
     m_Data:
     - key: VRDevice.reticleObject

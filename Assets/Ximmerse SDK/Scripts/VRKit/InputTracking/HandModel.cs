@@ -10,12 +10,12 @@ using System.Collections;
 namespace Ximmerse.InputSystem {
 
 /// <summary>
-/// Modified from https://github.com/googlevr/gvr-unity-sdk/blob/master/GoogleVR/Scripts/Controller/GvrArmModel.cs
+/// Modified from https://github.com/googlevr/gvr-unity-sdk/blob/master/GoogleVR/Scripts/Controller/GvrHandModel.cs
 /// </summary>
-public partial class ArmModel {
+public partial class HandModel {
 #if true
 /*
-  private static ArmModel instance = null;
+  private static HandModel instance = null;
 */
 
   /// Initial relative location of the shoulder (meters).
@@ -85,10 +85,10 @@ public partial class ArmModel {
 /*
   
   /// Use the Controller singleton to obtain a singleton for this class.
-  public static ArmModel Instance {
+  public static HandModel Instance {
     get {
       if (instance == null) {
-        instance = Controller.ArmModel;
+        instance = Controller.HandModel;
       }
       return instance != null && instance.isActiveAndEnabled ? instance : null;
     }
@@ -171,9 +171,9 @@ public partial class ArmModel {
   /// player's face.
   public float tooltipAlphaValue { get; private set; }
 
-  /// Event handler that occurs when the state of the ArmModel is updated.
-  public delegate void OnArmModelUpdateEvent();
-  public event OnArmModelUpdateEvent OnArmModelUpdate;
+  /// Event handler that occurs when the state of the HandModel is updated.
+  public delegate void OnHandModelUpdateEvent();
+  public event OnHandModelUpdateEvent OnHandModelUpdate;
 
   public void Start() {
     // Obtain the  controller from the scene.
@@ -220,13 +220,13 @@ public partial class ArmModel {
     } else {
       elbowOffset = Vector3.zero;
     }
-    ApplyArmModel();
+    ApplyHandModel();
     UpdateTransparency();
     UpdatePointer();
 
     firstUpdate = false;
-    if (OnArmModelUpdate != null) {
-      OnArmModelUpdate();
+    if (OnHandModelUpdate != null) {
+      OnHandModelUpdate();
     }
   }
 
@@ -339,7 +339,7 @@ public partial class ArmModel {
     }
   }
 
-  private void ApplyArmModel() {
+  private void ApplyHandModel() {
     // Find the controller's orientation relative to the player
     Quaternion controllerOrientation = Controller.GetRotation();
     controllerOrientation = Quaternion.Inverse(shoulderRotation) * controllerOrientation;

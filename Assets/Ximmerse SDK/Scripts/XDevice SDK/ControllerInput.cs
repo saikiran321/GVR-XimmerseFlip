@@ -184,9 +184,10 @@ namespace Ximmerse.InputSystem {
 				m_PrevFrameCount=Time.frameCount;
 				m_PrevState=m_State;
 				//
-				XDevicePlugin.GetInputState(this.handle,ref this.m_State);
-				// For Daydream standard.
-				if(m_State.axes[(int)ControllerAxis.PrimaryThumbX]!=0.0f&&m_State.axes[(int)ControllerAxis.PrimaryThumbY]!=0.0f) {
+				int result = XDevicePlugin.GetInputState(this.handle,ref this.m_State);
+
+				// For 3dof standard.
+                if( result >-1 && m_State.axes[(int)ControllerAxis.PrimaryThumbX]!=0.0f&&m_State.axes[(int)ControllerAxis.PrimaryThumbY]!=0.0f) {
 					m_TouchPos.Set(m_State.axes[(int)ControllerAxis.PrimaryThumbX],m_State.axes[(int)ControllerAxis.PrimaryThumbY]);
 					//
 					m_TouchPos.x=(m_TouchPos.x+1.0f)*.5f;
@@ -388,7 +389,7 @@ namespace Ximmerse.InputSystem {
 		}
 
 		/// <summary>
-		/// In Daydream standard,if the user is touching the touchpad, this is the touch position in
+		/// In 3dof standard,if the user is touching the touchpad, this is the touch position in
 		/// normalized coordinates, where (0,0) is the top-left of the touchpad
 		/// and (1,1) is the bottom right. If the user is not touching the touchpad,
 		/// then this is the position of the last touch.

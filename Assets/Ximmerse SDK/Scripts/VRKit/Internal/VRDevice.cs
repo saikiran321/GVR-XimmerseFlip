@@ -103,7 +103,7 @@ namespace Ximmerse.VR{
 						m_MethodRefreshRate =()=>(60.0f);
 					break;
 #if !UNITY_EDITOR && UNITY_ANDROID
-					default:// Cardboard,Gear VR and Daydream.
+					default://Gear VR
 						m_MethodRefreshRate=()=>(60.0f);
 					break;
 #endif

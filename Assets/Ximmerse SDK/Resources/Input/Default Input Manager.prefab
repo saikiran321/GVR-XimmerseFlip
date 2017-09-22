@@ -101,16 +101,6 @@ MonoBehaviour:
     name: XCobra-0
     defaultNode: 3
     handedness: 1
-  - addedElbowHeight: 0
-    addedElbowDepth: 0
-    pointerTiltAngle: 15
-    fadeDistanceFromFace: 0.32
-    tooltipMinDistanceFromFace: 0.45
-    followGaze: 1
-    useAccelerometer: 0
-    name: XCobra-1
-    defaultNode: 3
-    handedness: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

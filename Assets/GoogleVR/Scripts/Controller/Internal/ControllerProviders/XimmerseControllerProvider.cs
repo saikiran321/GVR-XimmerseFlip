@@ -8,8 +8,10 @@ namespace Gvr.Internal {
 	public class XimmerseControllerProvider : IControllerProvider
 {
   private ControllerState state = new ControllerState();
-		protected ControllerInput ctrl;
-		public bool SupportsBatteryStatus {
+  private XDevicePlugin.ControllerState m_leftControllerState;
+  private int handle;
+  protected ControllerInput ctrl;
+  public bool SupportsBatteryStatus {
 			get { return true; }
 		}
   #region IControllerProvider implementation
@@ -33,7 +35,26 @@ namespace Gvr.Internal {
 			lock (state) {
 
 				if (ctrl != null) {
-					ctrl.UpdateState ();
+
+					XDevicePlugin.UpdateInputState(handle);
+					XDevicePlugin.GetInputState(handle, ref m_leftControllerState);
+					state.orientation = new Quaternion(
+						-m_leftControllerState.rotation[0],
+						-m_leftControllerState.rotation[1],
+						m_leftControllerState.rotation[2],
+						m_leftControllerState.rotation[3]
+					);
+					state.gyro = new Vector3(
+						-m_leftControllerState.gyroscope[0],
+						-m_leftControllerState.gyroscope[1],
+						m_leftControllerState.gyroscope[2]
+					);
+					state.accel = new Vector3(
+						m_leftControllerState.accelerometer[0],
+						m_leftControllerState.accelerometer[1],
+						-m_leftControllerState.accelerometer[2]
+					);
+					state.touchPos = ctrl.touchPos;
 					// GVR Hack Detection Controller
 					if (ctrl.connectionState == DeviceConnectionState.Connected) {
 						state.connectionState = GvrConnectionState.Connected;
@@ -53,10 +74,6 @@ namespace Gvr.Internal {
 					state.clickButtonDown = ctrl.GetButtonDown (XimmerseButton.Click) || ctrl.GetButtonDown (XimmerseButton.Trigger);
 					state.clickButtonState = ctrl.GetButton (XimmerseButton.Click) || ctrl.GetButton (XimmerseButton.Trigger);
 					state.clickButtonUp = ctrl.GetButtonUp (XimmerseButton.Click) || ctrl.GetButtonUp (XimmerseButton.Trigger);
-					state.orientation = ctrl.GetRotation ();
-					state.gyro = -ctrl.GetGyroscope ();
-					state.accel = ctrl.GetAccelerometer ();
-					state.touchPos = ctrl.touchPos;
 
 					// GVR Battery Indicator
 					if (ctrl.batteryLevel > 80) {

@@ -9,7 +9,7 @@ using Ximmerse.VR;
 
 namespace Ximmerse.InputSystem {
 
-	public enum ArmModelNode {
+	public enum HandModelNode {
 		Shoulder,
 		Elbow,
 		Wrist,
@@ -17,14 +17,14 @@ namespace Ximmerse.InputSystem {
 	}
 
 	[System.Serializable]
-	public partial class ArmModel:IInputTracking{
+	public partial class HandModel:IInputTracking{
 
 		public string name;
 		public TrackedControllerInput Controller;
-		public ArmModelNode defaultNode=ArmModelNode.Pointer;
+		public HandModelNode defaultNode=HandModelNode.Pointer;
 		public ControllerType handedness;
 
-		public ArmModel(string name,ControllerType handedness) {
+		public HandModel(string name,ControllerType handedness) {
 			this.name=name;
 			this.handedness=handedness;
 		}
@@ -47,11 +47,11 @@ namespace Ximmerse.InputSystem {
 				node=(int)defaultNode;
 			}
 			//
-			switch((ArmModelNode)node) {
-				case ArmModelNode.Pointer:return pointerPosition;
-				case ArmModelNode.Wrist:return wristPosition;
-				case ArmModelNode.Elbow:return elbowPosition;
-				case ArmModelNode.Shoulder:return shoulderPosition;
+			switch((HandModelNode)node) {
+				case HandModelNode.Pointer:return pointerPosition;
+				case HandModelNode.Wrist:return wristPosition;
+				case HandModelNode.Elbow:return elbowPosition;
+				case HandModelNode.Shoulder:return shoulderPosition;
 			}
 			//
 			return Vector3.zero;
@@ -62,24 +62,24 @@ namespace Ximmerse.InputSystem {
 				node=(int)defaultNode;
 			}
 			//
-			switch((ArmModelNode)node) {
-				case ArmModelNode.Pointer:return pointerRotation;
-				case ArmModelNode.Wrist:return wristRotation;
-				case ArmModelNode.Elbow:return elbowRotation;
-				case ArmModelNode.Shoulder:return shoulderRotation;
+			switch((HandModelNode)node) {
+				case HandModelNode.Pointer:return pointerRotation;
+				case HandModelNode.Wrist:return wristRotation;
+				case HandModelNode.Elbow:return elbowRotation;
+				case HandModelNode.Shoulder:return shoulderRotation;
 			}
 			//
 			return Quaternion.identity;
 		}
 	}
 
-	public class ArmModelInput:MonoBehaviour,IInputModule{
+	public class HandModelInput:MonoBehaviour,IInputModule{
 
 		#region Fields
 
-		[SerializeField]protected ArmModel[] m_Controllers=new ArmModel[2]{
-			new ArmModel("LeftController",ControllerType.LeftController),
-			new ArmModel("RightController",ControllerType.RightController),
+		[SerializeField]protected HandModel[] m_Controllers=new HandModel[2]{
+			new HandModel("LeftController",ControllerType.LeftController),
+			new HandModel("RightController",ControllerType.RightController),
 		};
 
 		#endregion Fields

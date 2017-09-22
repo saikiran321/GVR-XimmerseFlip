@@ -164,9 +164,9 @@ public class ControllerVisual:MonoBehaviour {
 		};
 		buttons=new ButtonListener[7] {
 			// Touch
-			new ButtonListener{name="Touch",acceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.Touch},unacceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.TouchpadClick}},
+            new ButtonListener{name="Touch",acceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.Touch},unacceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.Click}},
 			// Click
-			new ButtonListener{name="Click",acceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.TouchpadClick}},
+            new ButtonListener{name="Click",acceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.Click}},
 			// App
 			new ButtonListener{name="App",acceptables=new ControllerButton[1]{(ControllerButton)XimmerseButton.App}},
 			// Home
