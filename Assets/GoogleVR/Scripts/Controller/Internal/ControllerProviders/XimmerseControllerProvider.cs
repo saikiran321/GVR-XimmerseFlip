@@ -1,7 +1,8 @@
 using UnityEngine;
+using System;
+using System.Diagnostics;
 using UnityEngine.VR;
 using Ximmerse.InputSystem;
-using Gvr;
 
 
 namespace Gvr.Internal {
@@ -10,6 +11,7 @@ namespace Gvr.Internal {
 		private ControllerState state = new ControllerState();
 		private XDevicePlugin.ControllerState m_leftControllerState;
 		private int handle;
+		private bool EnableXdevice = false;
 		protected ControllerInput ctrl;
 		public bool SupportsBatteryStatus {
 			get { return true; }
@@ -25,12 +27,6 @@ namespace Gvr.Internal {
   // this is called every frame
 		void IControllerProvider.ReadState (ControllerState outState)
 		{
-
-			if (ctrl == null) {
-				XDevicePlugin.Init ();
-				handle = XDevicePlugin.GetInputDeviceHandle ("XCobra-0");
-				ctrl = new ControllerInput (handle);
-			}
 
 			lock (state) {
 
@@ -110,6 +106,9 @@ namespace Gvr.Internal {
 					if (ctrl.GetButtonDown (XimmerseButton.Home)) {
 						state.recentering = true;
 					}
+
+					   state.gvrPtr = IntPtr.Zero;
+
 					if (ctrl.GetButtonUp (XimmerseButton.Home)) {
 						GvrCardboardHelpers.Recenter ();
 						ctrl.Recenter ();
@@ -120,6 +119,12 @@ namespace Gvr.Internal {
 				} 
 
 				else {
+					if (EnableXdevice == false) {
+					EnableXdevice = true;
+					XDevicePlugin.Init ();
+					handle = XDevicePlugin.GetInputDeviceHandle ("XCobra-0");
+					ctrl = new ControllerInput (handle);
+								}
 					state.connectionState = GvrConnectionState.Disconnected;
 					state.clickButtonState = false;
 					state.clickButtonDown = false;
