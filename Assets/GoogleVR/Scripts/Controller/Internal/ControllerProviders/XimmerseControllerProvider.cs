@@ -6,30 +6,30 @@ using Gvr;
 
 namespace Gvr.Internal {
 	public class XimmerseControllerProvider : IControllerProvider
-{
-  private ControllerState state = new ControllerState();
-  private XDevicePlugin.ControllerState m_leftControllerState;
-  private int handle;
-  protected ControllerInput ctrl;
-  public bool SupportsBatteryStatus {
+	{
+		private ControllerState state = new ControllerState();
+		private XDevicePlugin.ControllerState m_leftControllerState;
+		private int handle;
+		protected ControllerInput ctrl;
+		public bool SupportsBatteryStatus {
 			get { return true; }
 		}
   #region IControllerProvider implementation
-  void IControllerProvider.OnPause ()
-  {
-  }
-  void IControllerProvider.OnResume ()
-  {
-  }
-			 
+		void IControllerProvider.OnPause ()
+		{
+		}
+		void IControllerProvider.OnResume ()
+		{
+		}
+		
   // this is called every frame
-  void IControllerProvider.ReadState (ControllerState outState)
-  {
+		void IControllerProvider.ReadState (ControllerState outState)
+		{
 
 			if (ctrl == null) {
-					XDevicePlugin.Init ();
-					int handle = XDevicePlugin.GetInputDeviceHandle ("XCobra-0");
-					ctrl = new ControllerInput (handle);
+				XDevicePlugin.Init ();
+				handle = XDevicePlugin.GetInputDeviceHandle ("XCobra-0");
+				ctrl = new ControllerInput (handle);
 			}
 
 			lock (state) {
@@ -43,17 +43,17 @@ namespace Gvr.Internal {
 						-m_leftControllerState.rotation[1],
 						m_leftControllerState.rotation[2],
 						m_leftControllerState.rotation[3]
-					);
+						);
 					state.gyro = new Vector3(
 						-m_leftControllerState.gyroscope[0],
 						-m_leftControllerState.gyroscope[1],
 						m_leftControllerState.gyroscope[2]
-					);
+						);
 					state.accel = new Vector3(
 						m_leftControllerState.accelerometer[0],
 						m_leftControllerState.accelerometer[1],
 						-m_leftControllerState.accelerometer[2]
-					);
+						);
 					state.touchPos = ctrl.touchPos;
 					// GVR Hack Detection Controller
 					if (ctrl.connectionState == DeviceConnectionState.Connected) {
@@ -132,11 +132,11 @@ namespace Gvr.Internal {
 
 				outState.CopyFrom (state);
 			}
-    			state.ClearTransientState();
-  }
-			
+			state.ClearTransientState();
+		}
+		
   #endregion
 
-}
+	}
 
 }
