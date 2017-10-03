@@ -39,12 +39,7 @@ public class GvrRecenterOnlyController : MonoBehaviour {
       return;
     }
     // Daydream is loaded only on deivce, not in editor.
-#if UNITY_ANDROID && !UNITY_EDITOR
-		if (VRSettings.loadedDeviceName != "daydream" || VRSettings.loadedDeviceName != "cardboard")
-        {
-            return;
-        }
-#endif
+
     if (GvrControllerInput.Recentered) {
       pointer.transform.rotation = recenteringOffset;
       cam.transform.parent.rotation = recenteringOffset;
