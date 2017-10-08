@@ -1,11 +1,11 @@
 # Gvr-XimmerseFlip
 
-**Modified gvr-unity-sdk** with Ximmerse-Flip Provider integration to bypass the Daydream Controller bind on Google VR Services. Daydream Elements is present on unity package for [demonstration](https://github.com/tazzkiller/Gvr-XimmerseFlip/releases/).
+**Modified gvr-unity-sdk** with Ximmerse-Flip SDK and Provider modification to bind Ximmerse Flip on Google VR Services for Unity3d Cardboard Build.
 
 ## Prerequesite : 
 > Google VR Services  [Download](https://play.google.com/store/apps/details?id=com.google.vr.vrcore)
 
-> BTConfig[1.0.0-Flip] [Download on Release Section](https://github.com/tazzkiller/Gvr-XimmerseFlip/releases/ )
+> Flip BTConfig [Download](https://github.com/Ximmerse/SDK_Flip/raw/master/Tools/BTConfig%5B1.0.0-Flip%5D.apk)
 
 > Unity 2017.x.x
 ## Installation :
@@ -13,6 +13,6 @@
 > Bind your Flip Controller to **Bluetooth** and **BT-Config**.
 
 #### Unity
-> Import the modified GoogleVR package ( [Download on Release Section](https://github.com/tazzkiller/Gvr-XimmerseFlip/releases/) ) and set your PlayerSettings Virtual-Reality to " **Cardboard** " ( switch to Daydream ignore modification and use the native provider. ) 
+> Import asset folder to your project ( [Download](https://github.com/tazzkiller/GVR-XimmerseFlip/archive/master.zip) ) and set your PlayerSettings Virtual-Reality to " **Cardboard** " ( switch to Daydream ignore modification asnd use the native provider) .
 
 > **Build your own project and enjoy it !**
