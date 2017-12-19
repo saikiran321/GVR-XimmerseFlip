@@ -13,6 +13,26 @@ namespace Gvr.Internal {
 		private int handle;
 		private bool EnableXdevice = false;
 		protected ControllerInput ctrl;
+		private bool FlipAppInstalled() {
+			#if UNITY_ANDROID
+			AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+			AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
+			AndroidJavaObject packageManager = ca.Call<AndroidJavaObject>("getPackageManager");
+			AndroidJavaObject launchIntent = null;
+			try{
+				launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage","com.ximmerse.xtools.bt_bind" );
+			}catch(Exception ex){}
+			if(launchIntent == null) {
+				return false;
+			} else {
+			return true;
+			}
+			#else
+			return false;
+			#endif
+		}
+
+
 		public bool SupportsBatteryStatus {
 			get { return true; }
 		}
@@ -27,7 +47,6 @@ namespace Gvr.Internal {
   // this is called every frame
 		void IControllerProvider.ReadState (ControllerState outState)
 		{
-
 			lock (state) {
 
 				if (ctrl != null) {
@@ -114,12 +133,12 @@ namespace Gvr.Internal {
 				} 
 
 				else {
-					if (EnableXdevice == false) {
+					if (EnableXdevice == false && FlipAppInstalled() == true) {
 					EnableXdevice = true;
 					XDevicePlugin.Init ();
 					handle = XDevicePlugin.GetInputDeviceHandle ("XCobra-0");
 					ctrl = new ControllerInput (handle);
-								}
+		          		}
 					state.connectionState = GvrConnectionState.Disconnected;
 					state.clickButtonState = false;
 					state.clickButtonDown = false;
