@@ -20,6 +20,9 @@
 > **Build your own project and enjoy it !**
 
 ## Tips :
+> media-apps-template folder contains latest modified GoogleVR for Ximmerse and all common features of Daydream Elements.
+
+
 > If you want to use the GvrRecenterOnlyController edit "GoogleVR/Scripts/Controller/GvrRecenterOnlyController.cs" and remove :
 ```
 #if UNITY_ANDROID && !UNITY_EDITOR
